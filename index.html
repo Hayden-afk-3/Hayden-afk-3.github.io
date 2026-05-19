@@ -1,110 +1,875 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Webpage Title (will show on tab) -->
-    <title>Professional Portfolio</title>
-    <style>
-        /* Basic styling for the page */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav {
-            margin: 1rem 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 1rem;
-        }
-        section {
-            padding: 2rem;
-            border-bottom: 1px solid #ddd;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background: #333;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+    :root {
+      --sky-deep:    #0d0018;
+      --sky-purple:  #3d0060;
+      --sky-magenta: #8b1a8b;
+      --sky-orange:  #d4500a;
+      --sky-amber:   #ff9000;
+      --sky-gold:    #ffc200;
+      --sun-core:    #fff5b0;
+      --road-mid:    #1a1a2e;
+      --road-edge:   #2a0a3a;
+      --stripe:      #fffde0;
+      --neon-pink:   #ff3fa4;
+      --neon-cyan:   #00eeff;
+      --neon-yellow: #ffe600;
+      --card-bg:     rgba(13,0,28,0.72);
+      --card-border: rgba(255,63,164,0.45);
+      --text-main:   #ffe8f5;
+      --text-muted:  #c9a0d0;
+      --palm-dark:   #0a0016;
+      --palm-frond:  #0f0a00;
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--sky-deep);
+      color: var(--text-main);
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+ 
+    /* ── CUSTOM SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--sky-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 3px; }
+ 
+    /* ══════════════════════════════════════
+       HERO / HEADER
+    ══════════════════════════════════════ */
+    header {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+ 
+    /* Sky gradient */
+    .sky {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #0d0018 0%,
+        #2a0045 14%,
+        #6b0f7a 30%,
+        #c14000 52%,
+        #e87000 64%,
+        #ffc200 75%,
+        #ffe580 82%,
+        #fff5b0 88%,
+        #fff9cc 92%
+      );
+    }
+ 
+    /* Stars */
+    .stars {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--dur, 2.5s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0.2; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.5); }
+    }
+ 
+    /* Sun */
+    .sun-container {
+      position: absolute;
+      bottom: 38%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .sun {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, #fffde0 0%, #ffd740 40%, #ff9000 75%);
+      box-shadow:
+        0 0 40px 20px rgba(255,200,0,0.5),
+        0 0 100px 50px rgba(255,120,0,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Retrowave scanlines on sun */
+    .sun::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 7px,
+        rgba(120,40,0,0.38) 7px,
+        rgba(120,40,0,0.38) 9px
+      );
+    }
+ 
+    /* Mountain silhouette */
+    .mountains {
+      position: absolute;
+      bottom: 33%;
+      left: 0; right: 0;
+      height: 200px;
+      z-index: 3;
+    }
+    .mountains svg { width: 100%; height: 100%; }
+ 
+    /* Road */
+    .road {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 38%;
+      z-index: 4;
+      overflow: hidden;
+    }
+    .road svg { width: 100%; height: 100%; }
+ 
+    /* Palm trees */
+    .palms {
+      position: absolute;
+      bottom: 28%;
+      left: 0; right: 0;
+      height: 260px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .palms svg { width: 100%; height: 100%; }
+ 
+    /* Hero text */
+    .hero-text {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding-top: 5vh;
+      animation: fadeDown 1s ease both;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-text h1 {
+      font-family: 'Righteous', cursive;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow:
+        0 0 12px var(--neon-pink),
+        0 0 28px var(--neon-pink),
+        0 2px 0 rgba(0,0,0,0.5);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%,100% { text-shadow: 0 0 12px var(--neon-pink), 0 0 28px var(--neon-pink), 0 2px 0 rgba(0,0,0,.5); }
+      50%      { text-shadow: 0 0 20px var(--neon-pink), 0 0 50px var(--neon-pink), 0 0 80px var(--neon-cyan), 0 2px 0 rgba(0,0,0,.5); }
+    }
+    .hero-text .subtitle {
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      color: var(--neon-cyan);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+      text-shadow: 0 0 10px var(--neon-cyan);
+      animation: fadeDown 1s 0.3s ease both;
+    }
+ 
+    /* Nav */
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      gap: clamp(0.8rem, 3vw, 2rem);
+      margin-top: 1.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeDown 1s 0.5s ease both;
+    }
+    nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--neon-yellow);
+      border: 1px solid var(--neon-yellow);
+      padding: 0.4rem 1.1rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-shadow: 0 0 8px var(--neon-yellow);
+    }
+    nav a:hover {
+      background: var(--neon-yellow);
+      color: #0d0018;
+      box-shadow: 0 0 18px var(--neon-yellow);
+      text-shadow: none;
+    }
+ 
+    /* Scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      animation: fadeDown 1s 1s ease both;
+    }
+    .scroll-cue span {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--neon-pink);
+      text-shadow: 0 0 8px var(--neon-pink);
+    }
+    .scroll-cue .arrow {
+      width: 18px;
+      height: 18px;
+      border-right: 2px solid var(--neon-pink);
+      border-bottom: 2px solid var(--neon-pink);
+      transform: rotate(45deg);
+      animation: bounce 1.4s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: rotate(45deg) translateY(0); }
+      50%      { transform: rotate(45deg) translateY(6px); }
+    }
+ 
+    /* ══════════════════════════════════════
+       SECTION BASE STYLES
+    ══════════════════════════════════════ */
+    section {
+      position: relative;
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+ 
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--neon-pink);
+      text-shadow: 0 0 8px var(--neon-pink);
+      margin-bottom: 0.6rem;
+    }
+ 
+    section h2 {
+      font-family: 'Righteous', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.8rem;
+      position: relative;
+      display: inline-block;
+    }
+    section h2::after {
+      content: '';
+      display: block;
+      height: 3px;
+      margin-top: 0.4rem;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), transparent);
+      border-radius: 2px;
+    }
+ 
+    section p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.85;
+      max-width: 680px;
+    }
+ 
+    /* Divider line between sections */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-pink) 30%, var(--neon-cyan) 70%, transparent);
+      opacity: 0.35;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+ 
+    /* ══════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+ 
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .about-card:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0,238,255,0.15);
+    }
+    .about-card .card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.7rem;
+    }
+    .about-card h3 {
+      font-family: 'Righteous', cursive;
+      font-size: 1rem;
+      color: var(--neon-yellow);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .about-card p {
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+ 
+    /* ══════════════════════════════════════
+       PROJECTS
+    ══════════════════════════════════════ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 0.5rem;
+    }
+ 
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.6rem;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 8px 32px rgba(0,238,255,0.18), 0 0 0 1px rgba(0,238,255,0.1);
+    }
+    .project-number {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--neon-pink);
+      text-shadow: 0 0 8px var(--neon-pink);
+      margin-bottom: 0.7rem;
+    }
+    .project-card h3 {
+      font-family: 'Righteous', cursive;
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.03em;
+    }
+    .project-card p {
+      font-size: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--neon-yellow);
+      border-bottom: 1px solid var(--neon-yellow);
+      padding-bottom: 2px;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .project-link:hover {
+      color: #fff;
+      text-shadow: 0 0 8px var(--neon-yellow);
+    }
+    .project-link::after { content: ' →'; }
+ 
+    /* Add project button */
+    .add-project {
+      background: transparent;
+      border: 1px dashed rgba(255,63,164,0.4);
+      border-radius: 4px;
+      padding: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .add-project:hover {
+      border-color: var(--neon-pink);
+      color: var(--neon-pink);
+    }
+ 
+    /* ══════════════════════════════════════
+       CREDENTIALS
+    ══════════════════════════════════════ */
+    .cred-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .cred-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.2s;
+    }
+    .cred-item:hover { border-color: var(--neon-cyan); }
+    .cred-bullet {
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      background: var(--neon-pink);
+      border-radius: 50%;
+      margin-top: 4px;
+      box-shadow: 0 0 8px var(--neon-pink);
+    }
+    .cred-item strong {
+      display: block;
+      font-family: 'Righteous', cursive;
+      font-size: 0.95rem;
+      color: var(--neon-yellow);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+    .cred-item span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+ 
+    /* ══════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+    .contact-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1rem 1.3rem;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .contact-pill:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 20px rgba(255,63,164,0.2);
+    }
+    .contact-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+    .contact-value {
+      font-size: 0.82rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 6px rgba(0,238,255,0.4);
+    }
+ 
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      margin-top: 2rem;
+    }
+    .footer-road {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 100%;
+      z-index: 0;
+    }
+    .footer-road svg { width: 100%; height: 100%; }
+    .footer-content {
+      position: relative;
+      z-index: 1;
+    }
+    .footer-logo {
+      font-family: 'Righteous', cursive;
+      font-size: 1.5rem;
+      color: var(--neon-pink);
+      text-shadow: 0 0 16px var(--neon-pink);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    footer p {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+ 
+    /* ══════════════════════════════════════
+       ROAD STRIP between sections
+    ══════════════════════════════════════ */
+    .road-strip {
+      width: 100%;
+      height: 70px;
+      position: relative;
+      overflow: hidden;
+      background: #111122;
+    }
+    .road-strip::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -60%;
+      width: 220%;
+      height: 3px;
+      background: repeating-linear-gradient(90deg,
+        transparent 0, transparent 30px,
+        var(--stripe) 30px, var(--stripe) 60px
+      );
+      animation: roadScroll 1.4s linear infinite;
+    }
+    @keyframes roadScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(90px); }
+    }
+ 
+    /* ══════════════════════════════════════
+       GLOBAL GLOW OVERLAY
+    ══════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background:
+        radial-gradient(ellipse 80% 20% at 50% 100%, rgba(255,63,164,0.06) 0%, transparent 60%);
+    }
+ 
+    /* Fade-in on scroll (JS added class) */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <nav>
-            <a href="#about">About Me</a>
-            <a href="#projects">Projects</a>
-            <a href="#credentials">Credentials</a>
-            <a href="#contact">Contact Info</a>
-        </nav>
-    </header>
-
-    <!-- About Me Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
-            <!-- Add a brief introduction about yourself here -->
-            Hello! My name is [Your Name]. I am passionate about [your interests or profession]. 
-            Welcome to my portfolio website!
-        </p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>
-            <!-- Add a list or description of your projects here -->
-            Here are some of the projects I have worked on:
-        </p>
-        <ul>
-            <li>Project 1: [Brief description] <a href="[link to project repository]" target="_blank">[Project repository]</a></li>
-            <li>Project 2: [Brief description] <a href="[link to project repository]" target="_blank">[Project repository]</a></li>
-        </ul>
-    </section>
-
-    <!-- Credentials Section -->
-    <section id="credentials">
-        <h2>Credentials</h2>
-        <p>
-            <!-- Add your credentials, certifications, or achievements here -->
-            I have earned the following certifications and achievements:
-        </p>
-        <ul>
-            <li>Certification 1: [Details]</li>
-            <li>Certification 2: [Details]</li>
-            <li>Certification 3: [Details]</li>
-            <!-- Add images of your certification digital badges -->
-        </ul>
-    </section>
-
-    <!-- Contact Info Section -->
-    <section id="contact">
-        <h2>Contact Info</h2>
-        <p>
-            <!-- Add your contact information here -->
-            Feel free to reach out to me:
-        </p>
-        <ul>
-            <li>Email: [your-email@example.com]</li>
-            <li>LinkedIn: <a href="[your-linkedin-profile]" target="_blank">[Your LinkedIn]</a></li>
-        </ul>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
-    </footer>
+ 
+<!-- ══ HEADER / HERO ══════════════════════════════════════ -->
+<header>
+  <div class="sky"></div>
+ 
+  <!-- Stars (generated by JS) -->
+  <div class="stars" id="stars"></div>
+ 
+  <!-- Sun -->
+  <div class="sun-container" style="z-index:2;">
+    <div class="sun"></div>
+  </div>
+ 
+  <!-- Mountains -->
+  <div class="mountains">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,200 180,40 320,120 460,20 620,100 760,30 900,90 1060,10 1200,80 1360,50 1440,80 1440,200" fill="#1a0030"/>
+      <polygon points="0,200 100,90 220,150 380,60 520,130 680,70 820,140 960,50 1100,110 1280,60 1440,100 1440,200" fill="#0d0018"/>
+    </svg>
+  </div>
+ 
+  <!-- Road perspective -->
+  <div class="road">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Road base -->
+      <polygon points="520,0 920,0 1440,260 0,260" fill="#111126"/>
+      <!-- Road shoulders -->
+      <polygon points="520,0 560,0 1440,260 1300,260" fill="#1e0035"/>
+      <polygon points="880,0 920,0 140,260 0,260" fill="#1e0035"/>
+      <!-- Center dashes (perspective) -->
+      <line x1="720" y1="0" x2="720" y2="20"   stroke="#fffde0" stroke-width="5" opacity="0.9"/>
+      <line x1="718" y1="35" x2="722" y2="65"  stroke="#fffde0" stroke-width="4" opacity="0.7"/>
+      <line x1="715" y1="80" x2="725" y2="120" stroke="#fffde0" stroke-width="3" opacity="0.5"/>
+      <line x1="710" y1="135" x2="730" y2="185" stroke="#fffde0" stroke-width="2" opacity="0.3"/>
+      <!-- Edge glow -->
+      <line x1="520" y1="0" x2="0" y2="260"   stroke="#ff3fa4" stroke-width="2" opacity="0.35"/>
+      <line x1="920" y1="0" x2="1440" y2="260" stroke="#ff3fa4" stroke-width="2" opacity="0.35"/>
+    </svg>
+  </div>
+ 
+  <!-- Palm silhouettes -->
+  <div class="palms">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left palm -->
+      <rect x="88" y="140" width="8" height="120" fill="#0a0016" rx="4"/>
+      <ellipse cx="92" cy="148" rx="48" ry="18" fill="#0a0016" transform="rotate(-30 92 148)"/>
+      <ellipse cx="92" cy="148" rx="44" ry="16" fill="#0a0016" transform="rotate(-10 92 148)"/>
+      <ellipse cx="92" cy="148" rx="50" ry="16" fill="#0a0016" transform="rotate(15 92 148)"/>
+      <ellipse cx="92" cy="148" rx="40" ry="14" fill="#0a0016" transform="rotate(40 92 148)"/>
+      <!-- Far left palm -->
+      <rect x="36" y="160" width="6" height="100" fill="#0d001c" rx="3"/>
+      <ellipse cx="39" cy="166" rx="36" ry="13" fill="#0d001c" transform="rotate(-25 39 166)"/>
+      <ellipse cx="39" cy="166" rx="32" ry="12" fill="#0d001c" transform="rotate(20 39 166)"/>
+      <!-- Right palm -->
+      <rect x="1346" y="130" width="8" height="130" fill="#0a0016" rx="4"/>
+      <ellipse cx="1350" cy="138" rx="52" ry="19" fill="#0a0016" transform="rotate(30 1350 138)"/>
+      <ellipse cx="1350" cy="138" rx="46" ry="17" fill="#0a0016" transform="rotate(10 1350 138)"/>
+      <ellipse cx="1350" cy="138" rx="50" ry="16" fill="#0a0016" transform="rotate(-15 1350 138)"/>
+      <ellipse cx="1350" cy="138" rx="42" ry="14" fill="#0a0016" transform="rotate(-40 1350 138)"/>
+      <!-- Far right palm -->
+      <rect x="1398" y="155" width="6" height="105" fill="#0d001c" rx="3"/>
+      <ellipse cx="1401" cy="162" rx="38" ry="14" fill="#0d001c" transform="rotate(25 1401 162)"/>
+      <ellipse cx="1401" cy="162" rx="34" ry="12" fill="#0d001c" transform="rotate(-20 1401 162)"/>
+    </svg>
+  </div>
+ 
+  <!-- Hero text -->
+  <div class="hero-text">
+    <h1>[Your Name]</h1>
+    <p class="subtitle">// portfolio &nbsp;·&nbsp; projects &nbsp;·&nbsp; credentials</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+ 
+  <!-- Scroll cue -->
+  <div class="scroll-cue">
+    <span>scroll</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+ 
+<!-- Road animation strip -->
+<div class="road-strip"></div>
+ 
+<!-- ══ ABOUT ══════════════════════════════════════════════ -->
+<section id="about" class="reveal">
+  <p class="section-label">// 01 — about me</p>
+  <h2>Who I Am</h2>
+  <p>
+    Hello! My name is <strong style="color:#fff;">[Your Name]</strong>. I am passionate about
+    [your interests or profession]. Welcome to my portfolio — built with the sunset at my back
+    and the road ahead.
+  </p>
+  <div class="about-grid" style="margin-top:2rem;">
+    <div class="about-card">
+      <div class="card-icon">🛹</div>
+      <h3>What I Do</h3>
+      <p>[Describe your role, specialty, or what kind of work you create here.]</p>
+    </div>
+    <div class="about-card">
+      <div class="card-icon">🌅</div>
+      <h3>My Vibe</h3>
+      <p>[Add a fun personal detail — your working style, interests, or what drives you.]</p>
+    </div>
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+<div class="road-strip"></div>
+ 
+<!-- ══ PROJECTS ══════════════════════════════════════════ -->
+<section id="projects" class="reveal">
+  <p class="section-label">// 02 — projects</p>
+  <h2>What I've Built</h2>
+  <div class="projects-grid">
+ 
+    <!-- Project 1 -->
+    <div class="project-card">
+      <p class="project-number">PROJECT_01</p>
+      <h3>[Project Name]</h3>
+      <p>[Brief description of what this project does and the tech you used.]</p>
+      <a class="project-link" href="#" target="_blank">View Repository</a>
+    </div>
+ 
+    <!-- Project 2 -->
+    <div class="project-card">
+      <p class="project-number">PROJECT_02</p>
+      <h3>[Project Name]</h3>
+      <p>[Brief description of what this project does and the tech you used.]</p>
+      <a class="project-link" href="#" target="_blank">View Repository</a>
+    </div>
+ 
+    <!-- Project 3 placeholder -->
+    <div class="project-card">
+      <p class="project-number">PROJECT_03</p>
+      <h3>[Project Name]</h3>
+      <p>[Brief description of what this project does and the tech you used.]</p>
+      <a class="project-link" href="#" target="_blank">View Repository</a>
+    </div>
+ 
+    <!-- Add more -->
+    <div class="add-project">+ Add Project</div>
+ 
+  </div>
+</section>
+ 
+<div class="section-divider"></div>
+<div class="road-strip"></div>
+ 
+<!-- ══ CREDENTIALS ════════════════════════════════════════ -->
+<section id="credentials" class="reveal">
+  <p class="section-label">// 03 — credentials</p>
+  <h2>Achievements</h2>
+  <ul class="cred-list">
+    <li class="cred-item">
+      <div class="cred-bullet"></div>
+      <div>
+        <strong>[Certification Name]</strong>
+        <span>[Issuing organization · Year]</span>
+      </div>
+    </li>
+    <li class="cred-item">
+      <div class="cred-bullet"></div>
+      <div>
+        <strong>[Certification Name]</strong>
+        <span>[Issuing organization · Year]</span>
+      </div>
+    </li>
+    <li class="cred-item">
+      <div class="cred-bullet"></div>
+      <div>
+        <strong>[Certification Name]</strong>
+        <span>[Issuing organization · Year]</span>
+      </div>
+    </li>
+  </ul>
+</section>
+ 
+<div class="section-divider"></div>
+<div class="road-strip"></div>
+ 
+<!-- ══ CONTACT ════════════════════════════════════════════ -->
+<section id="contact" class="reveal">
+  <p class="section-label">// 04 — contact</p>
+  <h2>Get In Touch</h2>
+  <p>Feel free to reach out — I'm always rolling toward new opportunities.</p>
+  <div class="contact-grid">
+    <a class="contact-pill" href="mailto:your-email@example.com">
+      <span class="contact-icon">📡</span>
+      <div>
+        <p class="contact-label">Email</p>
+        <p class="contact-value">your-email@example.com</p>
+      </div>
+    </a>
+    <a class="contact-pill" href="#" target="_blank">
+      <span class="contact-icon">🔗</span>
+      <div>
+        <p class="contact-label">LinkedIn</p>
+        <p class="contact-value">Your LinkedIn</p>
+      </div>
+    </a>
+  </div>
+</section>
+ 
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-road">
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="600,0 840,0 1440,160 0,160" fill="#0d0018"/>
+      <line x1="720" y1="0" x2="720" y2="30"  stroke="#fffde0" stroke-width="4" opacity="0.6"/>
+      <line x1="718" y1="45" x2="722" y2="80" stroke="#fffde0" stroke-width="3" opacity="0.4"/>
+      <line x1="715" y1="95" x2="725" y2="145" stroke="#fffde0" stroke-width="2" opacity="0.2"/>
+      <line x1="600" y1="0" x2="0" y2="160"   stroke="#ff3fa4" stroke-width="1.5" opacity="0.3"/>
+      <line x1="840" y1="0" x2="1440" y2="160" stroke="#ff3fa4" stroke-width="1.5" opacity="0.3"/>
+    </svg>
+  </div>
+  <div class="footer-content">
+    <div class="footer-logo">[Your Name]</div>
+    <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+  </div>
+</footer>
+ 
+<script>
+  /* ── Generate stars ── */
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.8;
+    s.style.cssText = `
+      left: ${Math.random()*100}%;
+      top:  ${Math.random()*100}%;
+      width:  ${size}px;
+      height: ${size}px;
+      --dur: ${(Math.random()*2+1.5).toFixed(1)}s;
+      --del: ${(Math.random()*3).toFixed(1)}s;
+    `;
+    starsEl.appendChild(s);
+  }
+ 
+  /* ── Scroll reveal ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => io.observe(r));
+ 
+  /* ── Parallax sky on scroll ── */
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(window.scrollY / window.innerHeight, 1);
+    document.querySelector('.sky').style.opacity = 1 - pct * 0.5;
+  }, { passive: true });
+</script>
 </body>
 </html>
