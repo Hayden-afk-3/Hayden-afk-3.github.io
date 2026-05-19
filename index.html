@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professional Portfolio</title>
+  <title>Hayden Daugherty – Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     /* ── RESET & BASE ── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
     :root {
       --sky-deep:    #0d0018;
       --sky-purple:  #3d0060;
@@ -30,9 +30,9 @@
       --palm-dark:   #0a0016;
       --palm-frond:  #0f0a00;
     }
- 
+
     html { scroll-behavior: smooth; }
- 
+
     body {
       font-family: 'Space Mono', monospace;
       background: var(--sky-deep);
@@ -40,12 +40,12 @@
       overflow-x: hidden;
       cursor: crosshair;
     }
- 
+
     /* ── CUSTOM SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--sky-deep); }
     ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 3px; }
- 
+
     /* ══════════════════════════════════════
        HERO / HEADER
     ══════════════════════════════════════ */
@@ -59,7 +59,7 @@
       align-items: center;
       justify-content: flex-start;
     }
- 
+
     /* Sky gradient */
     .sky {
       position: absolute;
@@ -77,7 +77,7 @@
         #fff9cc 92%
       );
     }
- 
+
     /* Stars */
     .stars {
       position: absolute;
@@ -96,7 +96,7 @@
       0%,100% { opacity: 0.2; transform: scale(1); }
       50%      { opacity: 1;   transform: scale(1.5); }
     }
- 
+
     /* Sun */
     .sun-container {
       position: absolute;
@@ -130,7 +130,7 @@
         rgba(120,40,0,0.38) 9px
       );
     }
- 
+
     /* Mountain silhouette */
     .mountains {
       position: absolute;
@@ -140,7 +140,7 @@
       z-index: 3;
     }
     .mountains svg { width: 100%; height: 100%; }
- 
+
     /* Road */
     .road {
       position: absolute;
@@ -150,7 +150,7 @@
       overflow: hidden;
     }
     .road svg { width: 100%; height: 100%; }
- 
+
     /* Palm trees */
     .palms {
       position: absolute;
@@ -161,7 +161,7 @@
       pointer-events: none;
     }
     .palms svg { width: 100%; height: 100%; }
- 
+
     /* Hero text */
     .hero-text {
       position: relative;
@@ -199,7 +199,7 @@
       text-shadow: 0 0 10px var(--neon-cyan);
       animation: fadeDown 1s 0.3s ease both;
     }
- 
+
     /* Nav */
     nav {
       position: relative;
@@ -230,7 +230,7 @@
       box-shadow: 0 0 18px var(--neon-yellow);
       text-shadow: none;
     }
- 
+
     /* Scroll cue */
     .scroll-cue {
       position: absolute;
@@ -262,7 +262,7 @@
       0%,100% { transform: rotate(45deg) translateY(0); }
       50%      { transform: rotate(45deg) translateY(6px); }
     }
- 
+
     /* ══════════════════════════════════════
        SECTION BASE STYLES
     ══════════════════════════════════════ */
@@ -272,7 +272,7 @@
       max-width: 900px;
       margin: 0 auto;
     }
- 
+
     .section-label {
       font-size: 0.65rem;
       letter-spacing: 0.35em;
@@ -281,7 +281,7 @@
       text-shadow: 0 0 8px var(--neon-pink);
       margin-bottom: 0.6rem;
     }
- 
+
     section h2 {
       font-family: 'Righteous', cursive;
       font-size: clamp(1.8rem, 4vw, 2.8rem);
@@ -299,14 +299,14 @@
       background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), transparent);
       border-radius: 2px;
     }
- 
+
     section p {
       color: var(--text-muted);
       font-size: 0.92rem;
       line-height: 1.85;
       max-width: 680px;
     }
- 
+
     /* Divider line between sections */
     .section-divider {
       height: 1px;
@@ -315,7 +315,7 @@
       max-width: 900px;
       margin: 0 auto;
     }
- 
+
     /* ══════════════════════════════════════
        ABOUT
     ══════════════════════════════════════ */
@@ -326,7 +326,7 @@
       margin-top: 1rem;
     }
     @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
- 
+
     .about-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -354,7 +354,7 @@
       font-size: 0.82rem;
       line-height: 1.7;
     }
- 
+
     /* ══════════════════════════════════════
        PROJECTS
     ══════════════════════════════════════ */
@@ -364,7 +364,7 @@
       gap: 1.4rem;
       margin-top: 0.5rem;
     }
- 
+
     .project-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -423,7 +423,7 @@
       text-shadow: 0 0 8px var(--neon-yellow);
     }
     .project-link::after { content: ' →'; }
- 
+
     /* Add project button */
     .add-project {
       background: transparent;
@@ -445,7 +445,7 @@
       border-color: var(--neon-pink);
       color: var(--neon-pink);
     }
- 
+
     /* ══════════════════════════════════════
        CREDENTIALS
     ══════════════════════════════════════ */
@@ -489,7 +489,7 @@
       font-size: 0.8rem;
       color: var(--text-muted);
     }
- 
+
     /* ══════════════════════════════════════
        CONTACT
     ══════════════════════════════════════ */
@@ -531,7 +531,7 @@
       color: var(--neon-cyan);
       text-shadow: 0 0 6px rgba(0,238,255,0.4);
     }
- 
+
     /* ══════════════════════════════════════
        FOOTER
     ══════════════════════════════════════ */
@@ -566,7 +566,7 @@
       letter-spacing: 0.2em;
       color: var(--text-muted);
     }
- 
+
     /* ══════════════════════════════════════
        ROAD STRIP between sections
     ══════════════════════════════════════ */
@@ -594,7 +594,7 @@
       from { transform: translateX(0); }
       to   { transform: translateX(90px); }
     }
- 
+
     /* ══════════════════════════════════════
        GLOBAL GLOW OVERLAY
     ══════════════════════════════════════ */
@@ -607,26 +607,26 @@
       background:
         radial-gradient(ellipse 80% 20% at 50% 100%, rgba(255,63,164,0.06) 0%, transparent 60%);
     }
- 
+
     /* Fade-in on scroll (JS added class) */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
- 
+
 <!-- ══ HEADER / HERO ══════════════════════════════════════ -->
 <header>
   <div class="sky"></div>
- 
+
   <!-- Stars (generated by JS) -->
   <div class="stars" id="stars"></div>
- 
+
   <!-- Sun -->
   <div class="sun-container" style="z-index:2;">
     <div class="sun"></div>
   </div>
- 
+
   <!-- Mountains -->
   <div class="mountains">
     <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -634,7 +634,7 @@
       <polygon points="0,200 100,90 220,150 380,60 520,130 680,70 820,140 960,50 1100,110 1280,60 1440,100 1440,200" fill="#0d0018"/>
     </svg>
   </div>
- 
+
   <!-- Road perspective -->
   <div class="road">
     <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -653,7 +653,7 @@
       <line x1="920" y1="0" x2="1440" y2="260" stroke="#ff3fa4" stroke-width="2" opacity="0.35"/>
     </svg>
   </div>
- 
+
   <!-- Palm silhouettes -->
   <div class="palms">
     <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -679,11 +679,11 @@
       <ellipse cx="1401" cy="162" rx="34" ry="12" fill="#0d001c" transform="rotate(-20 1401 162)"/>
     </svg>
   </div>
- 
+
   <!-- Hero text -->
   <div class="hero-text">
-    <h1>[Your Name]</h1>
-    <p class="subtitle">// portfolio &nbsp;·&nbsp; projects &nbsp;·&nbsp; credentials</p>
+    <h1>Hayden Daugherty</h1>
+    <p class="subtitle">// cs student &nbsp;·&nbsp; creative problem solver</p>
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -691,82 +691,66 @@
       <a href="#contact">Contact</a>
     </nav>
   </div>
- 
+
   <!-- Scroll cue -->
   <div class="scroll-cue">
     <span>scroll</span>
     <div class="arrow"></div>
   </div>
 </header>
- 
+
 <!-- Road animation strip -->
 <div class="road-strip"></div>
- 
+
 <!-- ══ ABOUT ══════════════════════════════════════════════ -->
 <section id="about" class="reveal">
   <p class="section-label">// 01 — about me</p>
   <h2>Who I Am</h2>
   <p>
-    Hello! My name is <strong style="color:#fff;">[Your Name]</strong>. I am passionate about
-    [your interests or profession]. Welcome to my portfolio — built with the sunset at my back
-    and the road ahead.
+    Hello! My name is <strong style="color:#fff;">Hayden Daugherty</strong>. I'm a CS student
+    with a passion for building tools that actually make life easier. Welcome to my portfolio —
+    built with the sunset at my back and the road ahead.
   </p>
   <div class="about-grid" style="margin-top:2rem;">
     <div class="about-card">
       <div class="card-icon">🛹</div>
       <h3>What I Do</h3>
-      <p>[Describe your role, specialty, or what kind of work you create here.]</p>
+      <p>I build web projects and apps as a CS student, currently expanding my skills from Java into HTML, CSS, and beyond.</p>
     </div>
     <div class="about-card">
       <div class="card-icon">🌅</div>
       <h3>My Vibe</h3>
-      <p>[Add a fun personal detail — your working style, interests, or what drives you.]</p>
+      <p>Creative problem solver who loves turning an idea into something real — whether it's a utility app or a slick website.</p>
     </div>
   </div>
 </section>
- 
+
 <div class="section-divider"></div>
 <div class="road-strip"></div>
- 
+
 <!-- ══ PROJECTS ══════════════════════════════════════════ -->
 <section id="projects" class="reveal">
   <p class="section-label">// 02 — projects</p>
   <h2>What I've Built</h2>
   <div class="projects-grid">
- 
+
     <!-- Project 1 -->
     <div class="project-card">
       <p class="project-number">PROJECT_01</p>
-      <h3>[Project Name]</h3>
-      <p>[Brief description of what this project does and the tech you used.]</p>
-      <a class="project-link" href="#" target="_blank">View Repository</a>
+      <h3>Assignment Organizer</h3>
+      <p>A web app to help students track and organize their assignments. Originally built in Java, currently being migrated to HTML/CSS as part of learning web development.</p>
+      <a class="project-link" href="https://github.com/phAPCSAperiod2/final-project-Hayden-afk-3" target="_blank">View Repository</a>
     </div>
- 
-    <!-- Project 2 -->
-    <div class="project-card">
-      <p class="project-number">PROJECT_02</p>
-      <h3>[Project Name]</h3>
-      <p>[Brief description of what this project does and the tech you used.]</p>
-      <a class="project-link" href="#" target="_blank">View Repository</a>
-    </div>
- 
-    <!-- Project 3 placeholder -->
-    <div class="project-card">
-      <p class="project-number">PROJECT_03</p>
-      <h3>[Project Name]</h3>
-      <p>[Brief description of what this project does and the tech you used.]</p>
-      <a class="project-link" href="#" target="_blank">View Repository</a>
-    </div>
- 
+
     <!-- Add more -->
     <div class="add-project">+ Add Project</div>
- 
+
   </div>
 </section>
- 
+
 <div class="section-divider"></div>
 <div class="road-strip"></div>
- 
+
 <!-- ══ CREDENTIALS ════════════════════════════════════════ -->
 <section id="credentials" class="reveal">
   <p class="section-label">// 03 — credentials</p>
@@ -795,33 +779,33 @@
     </li>
   </ul>
 </section>
- 
+
 <div class="section-divider"></div>
 <div class="road-strip"></div>
- 
+
 <!-- ══ CONTACT ════════════════════════════════════════════ -->
 <section id="contact" class="reveal">
   <p class="section-label">// 04 — contact</p>
   <h2>Get In Touch</h2>
   <p>Feel free to reach out — I'm always rolling toward new opportunities.</p>
   <div class="contact-grid">
-    <a class="contact-pill" href="mailto:your-email@example.com">
+    <a class="contact-pill" href="mailto:hbdaugherty09@gmail.com">
       <span class="contact-icon">📡</span>
       <div>
         <p class="contact-label">Email</p>
-        <p class="contact-value">your-email@example.com</p>
+        <p class="contact-value">hbdaugherty09@gmail.com</p>
       </div>
     </a>
     <a class="contact-pill" href="#" target="_blank">
       <span class="contact-icon">🔗</span>
       <div>
         <p class="contact-label">LinkedIn</p>
-        <p class="contact-value">Your LinkedIn</p>
+        <p class="contact-value">Coming soon</p>
       </div>
     </a>
   </div>
 </section>
- 
+
 <!-- ══ FOOTER ══════════════════════════════════════════════ -->
 <footer>
   <div class="footer-road">
@@ -835,11 +819,11 @@
     </svg>
   </div>
   <div class="footer-content">
-    <div class="footer-logo">[Your Name]</div>
-    <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    <div class="footer-logo">Hayden Daugherty</div>
+    <p>&copy; 2025 Hayden Daugherty. All rights reserved.</p>
   </div>
 </footer>
- 
+
 <script>
   /* ── Generate stars ── */
   const starsEl = document.getElementById('stars');
@@ -857,14 +841,14 @@
     `;
     starsEl.appendChild(s);
   }
- 
+
   /* ── Scroll reveal ── */
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   reveals.forEach(r => io.observe(r));
- 
+
   /* ── Parallax sky on scroll ── */
   window.addEventListener('scroll', () => {
     const pct = Math.min(window.scrollY / window.innerHeight, 1);
